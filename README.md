@@ -7,16 +7,13 @@ Allow to read and write positional file by shema defined
 
 reading  `input.txt` file
 
-```
+```java
 public static void main(String...args){
 
    String inputFile = "C:\\Users\\User1\\Desktop\\input.txt";
-   String outputFile = "C:\\Users\\User1\\Desktop\\out.txt";
 
    try {
       RecorFileReader recorFileReader = new RecorFileReader(inputFile);
-      RecorFileWriter recorFileWriter = new RecorFileWriter(outputFile);
-
       recorFileWriter.write(recorFileReader.getElements());
 
    } catch (IOException e) {
