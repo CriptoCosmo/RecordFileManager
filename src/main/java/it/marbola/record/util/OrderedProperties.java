@@ -1,4 +1,4 @@
-package it.marbola.record.reader.util;
+package it.marbola.record.util;
 
 import java.util.Enumeration;
 import java.util.Properties;

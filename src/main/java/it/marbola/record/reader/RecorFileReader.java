@@ -1,5 +1,6 @@
 package it.marbola.record.reader;
-import it.marbola.record.reader.util.PropsUtil;
+import it.marbola.record.util.PropsUtil;
+import it.marbola.record.writer.RecorFileWriter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -75,6 +76,27 @@ public class RecorFileReader {
 
 	public List<Map<String,String>> getElements(){
 		return elements ;
+	}
+
+}
+
+class Main {
+
+	public static void main(String...args){
+
+		String inputFile = "C:\\Users\\User1\\Desktop\\input.txt";
+		String outputFile = "C:\\Users\\User1\\Desktop\\out.txt";
+
+		try {
+			RecorFileReader recorFileReader = new RecorFileReader(inputFile);
+			RecorFileWriter recorFileWriter = new RecorFileWriter(outputFile);
+
+			recorFileWriter.write(recorFileReader.getElements());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

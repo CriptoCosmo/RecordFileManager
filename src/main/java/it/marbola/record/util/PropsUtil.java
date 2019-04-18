@@ -1,4 +1,4 @@
-package it.marbola.record.reader.util;
+package it.marbola.record.util;
 
 import lombok.Cleanup;
 
@@ -18,7 +18,7 @@ public class PropsUtil {
 			@Cleanup
 			InputStream resourceStream = loader.getResourceAsStream(resourceName);
 			props.load(resourceStream);
-		} catch (IOException e) {
+		} catch (NullPointerException e) {
 			throw new IOException("File not found exception");
 		}
 
