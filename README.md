@@ -1,81 +1,126 @@
 # RecordFileManager
 Allow to read and write positional file by shema defined 
 
-## Examples
+## Schema 
 
-### Read
+Example schema definition `input-schema.properties`
 
-reading  `input.txt` file
+```properties
+# KEY = <length-of-field>
+id=2
+codFiscale=16
+sequence=16
+number=10
+FILLER_1=4
+date=10
+FILLER_2=4
+Note=22	
+```
+
+or if you want use custom model class with annotation
 
 ```java
-public static void main(String...args){
+public class ModelMap {
 
-   String inputFile = "C:\\Users\\User1\\Desktop\\input.txt";
+   @Definition(name="id", size=2)
+   private String id ;
 
-   try {
-      RecorFileReader recorFileReader = new RecorFileReader(inputFile);
-      recorFileWriter.write(recorFileReader.getElements());
+   @Definition(name="codiceFiscale", size=16)
+   private String codiceFiscale ;
 
-   } catch (IOException e) {
-      e.printStackTrace();
-   }
+   @Definition(name="sequence", size=12)
+   private String sequence ;
+
+   @Definition(name="number", size=10)
+   private String number ;
+
+   @Definition(size=4)
+   private Filler filler ;
+
+   @Definition(name="date", size=10)
+   private String date ;
+
+   @Definition(size=4)
+   private Filler filler2 ;
+
+   @Definition(name="note", size=6)
+   private Filler note ;
 
 }
 ```
+
+## Read
+
+reading  `input.txt` file
 
 ```txt
 01ABCDFGHILMNOPQR99999999999991234567890    18/04/2019    NOTE 1
 ```
 
 ```java
-public static void main(String...args){
+public static void main(String...args) throws IOException {
 
    String inputFile = "input.txt";
-   
-   try {
-      RecorFileReader recorFileReader = new RecorFileReader(inputFile);
 
-      for (Map element: recorFileReader.getElements()) {
-         System.out.print(element);
-      }
+   RecordFileReader recorFileReader = new RecordFileReader(inputFile, ModelMap.class);
 
-   } catch (IOException e) {
-      e.printStackTrace();
+   for(Map element: recorFileReader.getElements()) {
+		System.out.print(element);
    }
 
 }
 ```
+Result Map
 
-Result
-
+```json
+{
+	date=4/2019, 
+	sequence=9999999999991234, 
+	number=567890, 
+	codFiscale=ABCDFGHILMNOPQR9, 
+	id=01
+}
 ```
-{date=4/2019, sequence=9999999999991234, number=567890, codFiscale=ABCDFGHILMNOPQR9, id=01}
-```
-
-
 
 ## Write
 
-write file 
-
 ```java
-public static void main(String...args){
+public static void main(String...args) throws IOException {
+  
+    String outputFile = "out.txt";
 
-   String inputFile = "input.txt";
-   String outputFile = "out.txt";
+    Map<String,String> elements = new HashMap<>();
 
-   try {
-      RecorFileReader recorFileReader = new RecorFileReader(inputFile);
-      RecorFileWriter recorFileWriter = new RecorFileWriter(outputFile);
+    elements.put("id","01");
+    elements.put("codiceFiscale","ABCDFGHILMNOPQR9");
+    elements.put("sequence","9999999999991234");
+    elements.put("number","567890");
+    elements.put("date","2019");
+    elements.put("note","asd");
 
-      recorFileWriter.write(recorFileReader.getElements());
-
-   } catch (IOException e) {
-      e.printStackTrace();
-   }
+    RecorFileWriter recorFileWriter = new RecorFileWriter(outputFile, ModelMap.class);
+    recorFileWriter.write(Arrays.asList(elements));
 
 }
 ```
 
 
+
+# Note
+
+By default  `RecorFileReader` loocking for `input-schema.properties` file in resource folder but you can pass as parameter 
+
+- File name of your schema 
+
+- Directly the `Properties` object
+
+- `.class` of your custom entity
+
+  
+
+Like `RecorFileReader` also `RecorFileWriter`  loocking for `output-schema.properties` or `input-schema.properties` else you can pass as parameter 
+
+- File name of your schema 
+- Directly the `Properties` object
+- `.class` of your custom entity
 
