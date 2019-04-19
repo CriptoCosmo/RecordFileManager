@@ -41,7 +41,7 @@ number=10
 FILLER_1=4
 date=10
 FILLER_2=4
-Note=22	
+Note=22
 ```
 
 or if you want use custom model class with annotation

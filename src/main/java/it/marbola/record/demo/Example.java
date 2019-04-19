@@ -14,12 +14,12 @@ public class Example {
 
 		// Read
 		String inputFile = "C:\\Users\\User1\\Desktop\\input.txt";
-//
-//		RecordFileReader recorFileReader = new RecordFileReader(inputFile, ModelMap.class);
-//
-//		for (Map element: recorFileReader.getElements()) {
-//			System.out.print(element);
-//		}
+
+		RecordFileReader recorFileReader = new RecordFileReader(inputFile, ModelMap.class);
+
+		for (Map element: recorFileReader.getElements()) {
+			System.out.print(element);
+		}
 
 		// Write
 		String outputFile = "C:\\Users\\User1\\Desktop\\asdasdd.txt";
