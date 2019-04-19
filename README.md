@@ -1,6 +1,33 @@
 # RecordFileManager
 Allow to read and write positional file by shema defined 
 
+## Dependecy
+
+```xml
+<project>
+    ...
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    ...
+    <dependencies>
+        ...
+        <dependency>
+            <groupId>com.github.CriptoCosmo</groupId>
+            <artifactId>RecordFileManager</artifactId>
+            <version>master-SNAPSHOT</version>
+        </dependency>
+        ...
+    </dependencies>
+    ...
+</project>
+```
+
+for details : https://jitpack.io/#CriptoCosmo/RecordFileManager/master-SNAPSHOT
+
 ## Schema 
 
 Example schema definition `input-schema.properties`
